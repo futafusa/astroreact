@@ -30,7 +30,6 @@ function Plane() {
     const amountScroll = data.range(0, 1);
 
     if (refPlane.current) {
-      material.uniforms.uTime.value += delta;
       refPlane.current.rotation.x = amountScroll * Math.PI * 2;
     }
   });
@@ -46,7 +45,7 @@ export default function DemoThree() {
   return (
     <Canvas
       camera={{
-        fov: 45,
+        fov: 50,
         near: 0.1,
         far: 200,
         position: [0, 0, -1.5],
