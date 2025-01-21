@@ -7,10 +7,25 @@ import glsl from 'vite-plugin-glsl';
 export default defineConfig({
   integrations: [react(), tailwind()],
   vite: {
-    plugins: [glsl()]
+    plugins: [glsl()],
+    build: {
+      cssCodeSplit: false,
+      rollupOptions: {
+        output: {
+          assetFileNames: 'assets/[ext]/[name][extname]',
+          entryFileNames: 'assets/js/[name].js',
+          chunkFileNames: 'assets/js/[name].js',
+          manualChunks: {
+            'vendor': ['three', '@react-three/fiber', '@react-three/drei'],
+            'app': ['./src/components/']
+          }
+        }
+      }
+    }
   },
   compressHTML: false,
   build: {
     inlineStylesheets: 'never',
+    assets: 'assets',
   }
 });

@@ -48,7 +48,7 @@ function Sphere() {
         gl_FragColor = texColor;
       }
     `,
-    wireframe: true,
+    // wireframe: true,
     side: THREE.DoubleSide,
   });
 

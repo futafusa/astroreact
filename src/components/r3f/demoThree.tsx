@@ -11,10 +11,18 @@ function Plane() {
   const material = new THREE.ShaderMaterial({
     uniforms: {
       uTime: { value: 0 },
+      uScroll: { value: 0 },
     },
     vertexShader: `
+      uniform float uScroll;
+
       void main() {
-        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+        vec3 pos = position;
+        
+        float wave = sin(pos.x * 10.0 + uScroll * 5.0) * 0.1;
+        pos.z += wave * uScroll;
+        
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
       }
     `,
     fragmentShader: `
@@ -30,7 +38,8 @@ function Plane() {
     const amountScroll = data.range(0, 1);
 
     if (refPlane.current) {
-      refPlane.current.rotation.x = amountScroll * Math.PI * 2;
+      // refPlane.current.rotation.x = amountScroll * Math.PI * 2;
+      material.uniforms.uScroll.value = amountScroll;
     }
   });
 
@@ -44,19 +53,9 @@ function Plane() {
 export default function DemoThree() {
   return (
     <Canvas
-      camera={{
-        fov: 50,
-        near: 0.1,
-        far: 200,
-        position: [0, 0, -1.5],
-      }}
-      gl={{
-        toneMapping: THREE.ACESFilmicToneMapping,
-        toneMappingExposure: 1.0,
-      }}
-      style={{
-        background: '#000000'
-      }}
+      camera={{fov: 50, near: 0.1, far: 200, position: [0, 0, -1.5]}}
+      gl={{toneMapping: THREE.ACESFilmicToneMapping, toneMappingExposure: 1.0}}
+      style={{background: '#000000'}}
     >
       <ScrollControls pages={3} damping={0.4}>
         <Plane />
