@@ -1,0 +1,29 @@
+---
+interface nav {
+  title: string;
+  link: string;
+}
+
+const nav: nav[] = [
+  {
+    'title': 'Custom Shader',
+    'link': '/visual/customShader/',
+  },
+  {
+    'title': 'Demo Three',
+    'link': '/visual/demoThree/',
+  },
+]
+---
+
+<div class="flex gap-8 pt-10">
+  {nav.map((item) => (
+    <a href={item.link} class="block hover:bg-[#000] hover:text-[#fff]">
+      <div class="bg-[#000] w-10 h-10"></div>
+      <span>
+        {item.title}
+      </span>
+    </a>
+  ))}
+</div>
+

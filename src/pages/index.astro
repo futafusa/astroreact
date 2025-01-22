@@ -3,11 +3,12 @@
 import Layout from '../layouts/Layout.astro';
 import DefaultReact from '../components/defaultReact.tsx';
 import Threejs from '../components/threejs.tsx';
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import TopNav from '../components/topNav.astro';
 ---
 
 <Layout>
-	<!-- <DefaultReact client:load /> -->
-  <Threejs client:load />
+  <div class="p-10">
+    <h1 class="text-1xl font-bold">Audio/Visual/Reactive</h1>
+    <TopNav />
+  </div>
 </Layout>
